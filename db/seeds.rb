@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+2.times do |i|
+  user = User.create!(email: "user_#{i}@email.com", password: 123456)
+  2.times do |x|
+    Flat.create! user: user, name: "Flat_#{x}"
+  end
+end
