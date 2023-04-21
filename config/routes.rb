@@ -5,4 +5,18 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  resources :flats do
+    resources :bookings, only: [:create]
+  end
+  resources :bookings, only: :update do
+    member do
+      patch "accept"
+      patch "deny"
+    end
+  end
+
+
+
+  get 'profile', to: 'users#profile', as: :profile
 end

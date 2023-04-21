@@ -1,0 +1,20 @@
+<h1>Welcome, <%= current_user.email %></h1>
+
+<h3>Booking as owner</h3>
+<ul>
+  <% current_user.bookings_as_owner.each do |b| %>
+    <li><%= b.start_date %> <%= b.user.email %> <%= b.status %>
+      <%= simple_form_for(b) do |f| %>
+        <%= f.input :status, collection: Booking::STATUS_ENUM %>
+        <%= f.submit %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+<h3>Booking as owner 2 routes</h3>
+<ul>
+  <% current_user.bookings_as_owner.each do |b| %>
+    <li><%= b.start_date %> <%= b.user.email %> <%= b.status %> <%= link_to 'Accept', accept_booking_path(b), data: { turbo_method: 'patch' } %><%= link_to 'Deny', deny_booking_path(b), data: { turbo_method: 'patch' } %>
+    </li>
+  <% end %>
+</ul>
